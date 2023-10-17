@@ -3,6 +3,7 @@ from sqlalchemy.orm import joinedload
 
 from app.models import Task
 from core.repository import BaseRepository
+from asgiref.sync import sync_to_async
 
 
 class TaskRepository(BaseRepository[Task]):
@@ -20,7 +21,7 @@ class TaskRepository(BaseRepository[Task]):
         :param join_: The joins to make.
         :return: A list of tasks.
         """
-        query = await self._query(join_)
+        query = await sync_to_async(self._query)(join_)
         query = await self._get_by(query, "task_author_id", author_id)
 
         if join_ is not None:

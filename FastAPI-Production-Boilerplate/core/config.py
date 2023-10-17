@@ -19,7 +19,7 @@ class Config(BaseConfig):
     DEFAULT_LOCALE: str = "en_US"
     ENVIRONMENT: str = EnvironmentType.DEVELOPMENT
     POSTGRES_URL: PostgresDsn = (
-        "postgresql+asyncpg://user:password@127.0.0.1:5432/db-name"
+        "postgresql+asyncpg://userb:password@127.0.0.1:5432/db_name"
     )
     REDIS_URL: RedisDsn = "redis://localhost:6379/7"
     RELEASE_VERSION: str = "0.1"

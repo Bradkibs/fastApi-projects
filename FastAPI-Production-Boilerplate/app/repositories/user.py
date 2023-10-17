@@ -3,6 +3,7 @@ from sqlalchemy.orm import joinedload
 
 from app.models import User
 from core.repository import BaseRepository
+from asgiref.sync import sync_to_async
 
 
 class UserRepository(BaseRepository[User]):
@@ -20,13 +21,14 @@ class UserRepository(BaseRepository[User]):
         :param join_: Join relations.
         :return: User.
         """
-        query = await self._query(join_)
+        query = await sync_to_async(self._query)(join_)
         query = query.filter(User.username == username)
 
         if join_ is not None:
             return await self.all_unique(query)
 
         return await self._one_or_none(query)
+
 
     async def get_by_email(
         self, email: str, join_: set[str] | None = None
@@ -38,12 +40,12 @@ class UserRepository(BaseRepository[User]):
         :param join_: Join relations.
         :return: User.
         """
-        query = await self._query(join_)
+        query = await sync_to_async(self._query)(join_)
         query = query.filter(User.email == email)
 
         if join_ is not None:
             return await self.all_unique(query)
-   
+
         return await self._one_or_none(query)
 
     def _join_tasks(self, query: Select) -> Select:

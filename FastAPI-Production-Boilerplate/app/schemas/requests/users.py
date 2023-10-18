@@ -18,7 +18,7 @@ class RegisterUserRequest(BaseModel):
     username: constr(min_length=3, max_length=64, strict=True)
     phone_number: constr(min_length=10, max_length=14, strip_whitespace=True, strict=True)
     location: constr(min_length=2, max_length=20, strip_whitespace=True, strict=True)
-    role: constr(type=RoleChoices)
+    role: RoleChoices
 
     @validator("password")
     def password_must_contain_special_characters(cls, v):

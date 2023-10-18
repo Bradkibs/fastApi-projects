@@ -1,7 +1,7 @@
 from enum import Enum
 from uuid import uuid4
 
-from sqlalchemy import BigInteger, Boolean, Column, Unicode
+from sqlalchemy import BigInteger, Boolean, Column, Unicode, Enum as SQLAlchemyEnum
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 
@@ -24,6 +24,10 @@ class User(Base, TimestampMixin):
     uuid = Column(UUID(as_uuid=True), default=uuid4, unique=True, nullable=False)
     email = Column(Unicode(255), nullable=False, unique=True)
     password = Column(Unicode(255), nullable=False)
+    phone_number = Column(Unicode(20), nullable=False)
+    location = Column(Unicode(255), nullable=False, default='KENYA')
+    role = Column(SQLAlchemyEnum('admin', 'user', 'customer_service', name='user_role_enum'), default='user', nullable=False)
+    is_active = Column(Boolean, default=False)
     username = Column(Unicode(255), nullable=False, unique=True)
     is_admin = Column(Boolean, default=False)
 

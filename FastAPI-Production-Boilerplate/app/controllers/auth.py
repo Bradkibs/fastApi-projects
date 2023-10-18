@@ -41,7 +41,7 @@ class AuthController(BaseController[User]):
             }
         )
 
-    async def login(self, email: EmailStr, password: str) -> Token:
+    async def login(self, email: EmailStr, password: str, phone_number: str) -> Token:
         user = await self.user_repository.get_by_email(email)
 
         if not user:

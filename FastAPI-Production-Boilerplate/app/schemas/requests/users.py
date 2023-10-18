@@ -3,12 +3,22 @@
 import re
 
 from pydantic import BaseModel, EmailStr, constr, validator
+from enum import Enum
+
+
+class RoleChoices(Enum, str):
+    ADMIN = 'admin'
+    USER = 'user'
+    CUSTOMER_SERVICE = 'customer_service'
 
 
 class RegisterUserRequest(BaseModel):
     email: EmailStr
     password: constr(min_length=8, max_length=64)
     username: constr(min_length=3, max_length=64)
+    phone_number: constr(min_length=10, max_length=14, strip_whitespace=True)
+    location: constr(strip_whitespace=True, min_length=2, max_length=20)
+    role: constr(type=RoleChoices)
 
     @validator("password")
     def password_must_contain_special_characters(cls, v):
@@ -42,5 +52,6 @@ class RegisterUserRequest(BaseModel):
 
 
 class LoginUserRequest(BaseModel):
+    phone_number: str
     email: EmailStr
     password: str

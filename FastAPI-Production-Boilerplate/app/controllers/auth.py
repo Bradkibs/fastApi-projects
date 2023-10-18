@@ -15,7 +15,7 @@ class AuthController(BaseController[User]):
         self.user_repository = user_repository
 
     @Transactional(propagation=Propagation.REQUIRED)
-    async def register(self, email: EmailStr, password: str, username: str) -> User:
+    async def register(self, email: EmailStr, password: str, username: str, phone_number: str, location: str, role: str) -> User:
         # Check if user exists with email
         user = await self.user_repository.get_by_email(email)
 
@@ -35,6 +35,9 @@ class AuthController(BaseController[User]):
                 "email": email,
                 "password": password,
                 "username": username,
+                "phone_number": phone_number,
+                "location": location,
+                "role": role
             }
         )
 

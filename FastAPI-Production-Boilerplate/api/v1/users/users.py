@@ -35,6 +35,9 @@ async def register_user(
         email=register_user_request.email,
         password=register_user_request.password,
         username=register_user_request.username,
+        location=register_user_request.location,
+        phone_number=register_user_request.phone_number,
+        role=register_user_request.role,
     )
 
 
@@ -44,7 +47,9 @@ async def login_user(
     auth_controller: AuthController = Depends(Factory().get_auth_controller),
 ) -> Token:
     return await auth_controller.login(
-        email=login_user_request.email, password=login_user_request.password
+        email=login_user_request.email,
+        password=login_user_request.password,
+        phone_number=login_user_request.phone_number,
     )
 
 

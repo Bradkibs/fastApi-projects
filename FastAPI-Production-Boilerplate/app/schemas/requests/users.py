@@ -6,7 +6,7 @@ from pydantic import BaseModel, EmailStr, constr, validator
 from enum import Enum
 
 
-class RoleChoices(Enum, str):
+class RoleChoices(str, Enum):
     ADMIN = 'admin'
     USER = 'user'
     CUSTOMER_SERVICE = 'customer_service'
@@ -14,10 +14,10 @@ class RoleChoices(Enum, str):
 
 class RegisterUserRequest(BaseModel):
     email: EmailStr
-    password: constr(min_length=8, max_length=64)
-    username: constr(min_length=3, max_length=64)
-    phone_number: constr(min_length=10, max_length=14, strip_whitespace=True)
-    location: constr(strip_whitespace=True, min_length=2, max_length=20)
+    password: constr(min_length=8, max_length=64, strict=True)
+    username: constr(min_length=3, max_length=64, strict=True)
+    phone_number: constr(min_length=10, max_length=14, strip_whitespace=True, strict=True)
+    location: constr(min_length=2, max_length=20, strip_whitespace=True, strict=True)
     role: constr(type=RoleChoices)
 
     @validator("password")

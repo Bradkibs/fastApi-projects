@@ -7,9 +7,9 @@ from enum import Enum
 
 
 class RoleChoices(str, Enum):
-    ADMIN = 'admin'
     USER = 'user'
     CUSTOMER_SERVICE = 'customer_service'
+    ADMIN = 'admin'
 
 
 class RegisterUserRequest(BaseModel):

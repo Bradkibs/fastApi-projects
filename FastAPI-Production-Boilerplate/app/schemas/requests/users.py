@@ -50,6 +50,12 @@ class RegisterUserRequest(BaseModel):
             raise ValueError("Username must not contain special characters")
         return v
 
+    @validator("phone_number")
+    def phone_number_must_contain_plus_then_numbers(cls, v):
+        if not re.search(r"^\+\d+$", v):
+            raise ValueError("Phone number must start with + and then numbers")
+        return v
+
 
 class LoginUserRequest(BaseModel):
     phone_number: str

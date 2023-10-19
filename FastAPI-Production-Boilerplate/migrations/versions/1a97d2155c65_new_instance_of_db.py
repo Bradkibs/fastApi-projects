@@ -32,9 +32,9 @@ def upgrade() -> None:
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('email'),
-    sa.UniqueConstraint('username'),
-    sa.UniqueConstraint('uuid')
+    sa.UniqueConstraint('email', name='users_emails'),
+    sa.UniqueConstraint('username', name='users_usernames'),
+    sa.UniqueConstraint('uuid', name='users_uuid')
     )
     op.create_table('tasks',
     sa.Column('id', sa.BigInteger(), autoincrement=True, nullable=False),
@@ -47,7 +47,7 @@ def upgrade() -> None:
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['task_author_id'], ['users.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('uuid')
+    sa.UniqueConstraint('uuid', name='tasks_uuids')
     )
     # ### end Alembic commands ###
 

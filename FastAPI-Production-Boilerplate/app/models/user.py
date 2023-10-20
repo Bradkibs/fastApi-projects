@@ -20,17 +20,14 @@ class UserPermission(Enum):
 class User(Base, TimestampMixin):
     __tablename__ = "users"
 
-<<<<<<< HEAD
     id = Column(BigInteger, primary_key=True, autoincrement=True, sequence=sequence, unique=True)
-=======
     id = Column(BigInteger, Sequence('my_sequence', start=100000000000), primary_key=True, autoincrement=True,unique=True)
->>>>>>> 558af8e15633ad4a6a5e5dfdd856f2f9ec5cda86
     uuid = Column(UUID(as_uuid=True), default=uuid4, unique=True, nullable=False)
     email = Column(Unicode(255), nullable=False, unique=True)
-    password = Column(Unicode(255), nullable=False)
+    password = Column(Unicode(255), nullable=False, unique=True)
     phone_number = Column(Unicode(20), nullable=False, unique=True)
     location = Column(Unicode(255), nullable=False, default='KENYA')
-    role = Column(SQLAlchemyEnum('admin', 'user', 'customer_service', name='user_role_enum'), default='user', nullable=False)
+    role = Column(SQLAlchemyEnum('admin', 'user', 'customer_service', name='user_role'), default='user', nullable=False)
     is_active = Column(Boolean, default=False)
     username = Column(Unicode(255), nullable=False, unique=True)
     is_admin = Column(Boolean, default=False)

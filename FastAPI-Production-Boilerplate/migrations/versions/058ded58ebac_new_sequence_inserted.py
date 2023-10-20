@@ -27,7 +27,7 @@ def upgrade() -> None:
     sa.Column('password', sa.Unicode(length=255), nullable=False),
     sa.Column('phone_number', sa.Unicode(length=20), nullable=False),
     sa.Column('location', sa.Unicode(length=255), nullable=False),
-    sa.Column('role', sa.Enum('admin', 'user', 'customer_service', name='user_role_enum'), nullable=False),
+    sa.Column('role', sa.Enum('admin', 'user', 'customer_service', name='user_role'), nullable=False),
     sa.Column('is_active', sa.Boolean(), nullable=True),
     sa.Column('username', sa.Unicode(length=255), nullable=False),
     sa.Column('is_admin', sa.Boolean(), nullable=True),

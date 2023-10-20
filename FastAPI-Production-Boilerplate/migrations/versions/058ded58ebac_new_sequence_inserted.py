@@ -64,4 +64,5 @@ def downgrade() -> None:
     op.drop_constraint('uuid', 'tasks')
     op.drop_table('tasks')
     op.drop_table('users')
+    op.drop
     # ### end Alembic commands ###

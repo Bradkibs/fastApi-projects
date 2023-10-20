@@ -23,11 +23,11 @@ sequence = Sequence('my_sequence', start=100_000_000_000)
 class User(Base, TimestampMixin):
     __tablename__ = "users"
 
-    id = Column(BigInteger, primary_key=True, autoincrement=True, default=sequence, unique=True)
+    id = Column(BigInteger, primary_key=True, autoincrement=True, sequence=sequence, unique=True)
     uuid = Column(UUID(as_uuid=True), default=uuid4, unique=True, nullable=False)
     email = Column(Unicode(255), nullable=False, unique=True)
     password = Column(Unicode(255), nullable=False)
-    phone_number = Column(Unicode(20), nullable=False)
+    phone_number = Column(Unicode(20), nullable=False, unique=True)
     location = Column(Unicode(255), nullable=False, default='KENYA')
     role = Column(SQLAlchemyEnum('admin', 'user', 'customer_service', name='user_role_enum'), default='user', nullable=False)
     is_active = Column(Boolean, default=False)

@@ -20,8 +20,7 @@ class UserPermission(Enum):
 class User(Base, TimestampMixin):
     __tablename__ = "users"
 
-    id = Column(BigInteger, primary_key=True, autoincrement=True, sequence=sequence, unique=True)
-    id = Column(BigInteger, Sequence('my_sequence', start=100000000000), primary_key=True, autoincrement=True,unique=True)
+    id = Column(BigInteger, Sequence('my_sequence', start=100000000000), primary_key=True, autoincrement=True, unique=True)
     uuid = Column(UUID(as_uuid=True), default=uuid4, unique=True, nullable=False)
     email = Column(Unicode(255), nullable=False, unique=True)
     password = Column(Unicode(255), nullable=False, unique=True)

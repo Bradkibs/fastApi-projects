@@ -30,7 +30,7 @@ class User(Base, TimestampMixin):
     password = Column(Unicode(255), nullable=False)
     phone_number = Column(Unicode(20), nullable=False, unique=True)
     location = Column(Unicode(255), nullable=False, default='KENYA')
-    role = Column(SQLAlchemyEnum('admin', 'user', 'customer_service', name='user_role_enum'), default='user', nullable=False)
+    role = Column(SQLAlchemyEnum('admin', 'user', 'customer_service', name='user_role'), default='user', nullable=False)
     is_active = Column(Boolean, default=False)
     username = Column(Unicode(255), nullable=False, unique=True)
     is_admin = Column(Boolean, default=False)

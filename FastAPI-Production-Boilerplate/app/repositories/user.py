@@ -48,6 +48,24 @@ class UserRepository(BaseRepository[User]):
 
         return await self._one_or_none(query)
 
+    async def get_by_phone_number(
+        self, phone_number: str, join_: set[str] | None = None
+    ) -> User | None:
+        """
+        Get user by email.
+
+        :param phone_number: Phone_number.
+        :param join_: Join relations.
+        :return: User.
+        """
+        query = await sync_to_async(self._query)(join_)
+        query = query.filter(User.phone_number == phone_number)
+
+        if join_ is not None:
+            return await self.all_unique(query)
+
+        return await self._one_or_none(query)
+
     def _join_tasks(self, query: Select) -> Select:
         """
         Join tasks.

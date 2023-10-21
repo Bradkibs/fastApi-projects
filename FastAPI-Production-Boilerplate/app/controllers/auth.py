@@ -28,6 +28,11 @@ class AuthController(BaseController[User]):
         if user:
             raise BadRequestException("User already exists with this username")
 
+        # Check if user exists with phone_number
+        user = await self.user_repository.get_by_phone_number(phone_number)
+        if user:
+            raise BadRequestException("User already exists with this phone number")
+
         password = PasswordHandler.hash(password)
 
         return await self.user_repository.create(

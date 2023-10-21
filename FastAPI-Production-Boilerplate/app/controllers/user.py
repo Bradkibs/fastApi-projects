@@ -13,3 +13,6 @@ class UserController(BaseController[User]):
 
     async def get_by_email(self, email: str) -> User:
         return await self.user_repository.get_by_email(email)
+
+    async def get_by_phone_number(self, phone_number: str) -> User:
+        return await self.user_repository.get_by_phone_number(phone_number)
